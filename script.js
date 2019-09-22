@@ -8,7 +8,7 @@ class Account {
   }
 
   toString() {
-    str = this.name + "\n" + this.description + "\n";
+    return this.name + "<br>" + this.description + "<br>";
   }
 }
 
@@ -39,8 +39,11 @@ class UserInterface {
 
   accountToLi(account) {
     var accountLi = document.createElement("li");
+    var accountDesc = document.createElement("p");
     accountLi.textContent = account.name;
+    accountDesc.innerHTML = account.description;
     this.accountUl.appendChild(accountLi);
+    this.accountUl.appendChild(accountDesc);
   }
 
   getAccountInfo() {

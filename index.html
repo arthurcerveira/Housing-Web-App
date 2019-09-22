@@ -11,22 +11,25 @@
     <header></header>
     <body>
       <div>
-        <input type="text" id="email" />
+        <input type="email" placeholder="Email" id="email" />
       </div>
       <div>
-        <input type="text" id="password" />
+        <input type="password" placeholder="Password" id="password" />
       </div>
       <div>
-        <input type="text" id="name" />
+        <input type="text" placeholder="Name" id="name" />
       </div>
       <div>
-        <input type="text" id="description" />
+        <input type="text" placeholder="Description" id="description" />
       </div>
       <div>
-        <input type="text" id="role" />
+        <input type="text" placeholder="Role" id="role" />
       </div>
       <div>
         <button onclick="dataBase.createAccount()">Create Account</button>
+      </div>
+      <div>
+        <button onclick="dataBase.displayAccounts()">Display Accounts</button>
       </div>
       <ul class="accounts"></ul>
       <script src="script.js"></script>
