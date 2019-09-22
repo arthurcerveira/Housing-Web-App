@@ -1,3 +1,24 @@
+class Manager {
+  constructor() {
+    this.dataBase = new DataBase();
+    this.userInterface = new UserInterface();
+  }
+
+  createAccount() {
+    var account = this.userInterface.getAccountInfo();
+
+    if (account != null) this.dataBase.createAccount(account);
+  }
+
+  displayAccounts() {
+    this.userInterface.clearUl();
+
+    this.dataBase.accounts.forEach(account => {
+      this.userInterface.accountToLi(account);
+    });
+  }
+}
+
 class Account {
   constructor(email, password, name, description, role) {
     this.email = email;
@@ -5,10 +26,6 @@ class Account {
     this.name = name;
     this.description = description;
     this.role = role;
-  }
-
-  toString() {
-    return this.name + "<br>" + this.description + "<br>";
   }
 }
 
@@ -18,23 +35,18 @@ class DataBase {
     this.userInterface = new UserInterface();
   }
 
-  createAccount() {
-    var account = this.userInterface.getAccountInfo();
+  createAccount(account) {
     this.accounts.push(account);
-  }
-
-  displayAccounts() {
-    this.userInterface.accountUl.innerHTML = "";
-
-    this.accounts.forEach(account => {
-      this.userInterface.accountToLi(account);
-    });
   }
 }
 
 class UserInterface {
   constructor() {
     this.accountUl = document.querySelector(".accounts");
+  }
+
+  clearUl() {
+    this.accountToLi.innerHTML = "";
   }
 
   accountToLi(account) {
@@ -52,6 +64,19 @@ class UserInterface {
     var name = document.getElementById("name");
     var description = document.getElementById("description");
     var role = document.getElementById("role");
+
+    var warning = document.querySelector(".warning");
+
+    if (
+      email.value == "" ||
+      password.value == "" ||
+      name.value == "" ||
+      description.value == "" ||
+      role.value == ""
+    ) {
+      warning.textContent = "Fields can't be blank!";
+      return null;
+    } else warning.textContent = "";
 
     var account = new Account(
       email.value,
@@ -71,4 +96,4 @@ class UserInterface {
   }
 }
 
-dataBase = new DataBase();
+manager = new Manager();
