@@ -4,13 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js"></script>
+    <title>Housing</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header></header>
-    <body></body>
+    <body>
+      <div>
+        <input type="text" id="email" />
+      </div>
+      <div>
+        <input type="text" id="password" />
+      </div>
+      <div>
+        <input type="text" id="name" />
+      </div>
+      <div>
+        <input type="text" id="description" />
+      </div>
+      <div>
+        <input type="text" id="role" />
+      </div>
+      <div>
+        <button onclick="dataBase.createAccount()">Create Account</button>
+      </div>
+      <ul class="accounts"></ul>
+      <script src="script.js"></script>
+    </body>
     <footer></footer>
   </body>
 </html>
