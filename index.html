@@ -23,16 +23,24 @@
         <input type="text" placeholder="Description" id="description" />
       </div>
       <div>
-        <input type="text" placeholder="Role" id="role" />
+        <select id="role">
+          <option value=""></option>
+          <option value="Amigo Universitário">Amigo Universitário</option>
+          <option value="Host Family">Host Family</option>
+          <option value="International Students">International Students</option>
+        </select>
       </div>
       <div>
         <button onclick="manager.createAccount()">Create Account</button>
       </div>
+
       <p class="warning"></p>
+
       <div>
         <button onclick="manager.displayAccounts()">Display Accounts</button>
       </div>
       <ul class="accounts"></ul>
+
       <script src="script.js"></script>
     </body>
     <footer></footer>

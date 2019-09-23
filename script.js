@@ -53,7 +53,7 @@ class UserInterface {
     var accountLi = document.createElement("li");
     var accountDesc = document.createElement("p");
     accountLi.textContent = account.name;
-    accountDesc.innerHTML = account.description;
+    accountDesc.innerHTML = account.description + ", " + account.role;
     this.accountUl.appendChild(accountLi);
     this.accountUl.appendChild(accountDesc);
   }
@@ -66,6 +66,7 @@ class UserInterface {
     var role = document.getElementById("role");
 
     var warning = document.querySelector(".warning");
+    // warning.style.margin = 40;
 
     if (
       email.value == "" ||
@@ -74,9 +75,13 @@ class UserInterface {
       description.value == "" ||
       role.value == ""
     ) {
+      warning.style.color = "red";
       warning.textContent = "Fields can't be blank!";
       return null;
-    } else warning.textContent = "";
+    } else {
+      warning.style.color = "green";
+      warning.textContent = "Account created succesfully";
+    }
 
     var account = new Account(
       email.value,
