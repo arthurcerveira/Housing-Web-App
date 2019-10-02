@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const bcrypt = require("bcryptjs");
 
 function validateRegister(request) {
   const schema = {
@@ -48,6 +49,11 @@ function emailExists(email, Account) {
   return Account.findOne({ email: email });
 }
 
+function validatePassword(requestPassword, userPassword) {
+  return bcrypt.compare(requestPassword, userPassword);
+}
+
 module.exports.validateRegister = validateRegister;
 module.exports.validateLogin = validateLogin;
 module.exports.emailExists = emailExists;
+module.exports.validatePassword = validatePassword;
