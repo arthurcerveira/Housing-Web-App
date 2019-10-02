@@ -18,6 +18,10 @@ function validateRegister(request) {
     description: Joi.string()
       .min(3)
       .required()
+      .max(255),
+    role: Joi.string()
+      .min(3)
+      .required()
       .max(255)
   };
 
@@ -40,5 +44,10 @@ function validateLogin(request) {
   return Joi.validate(request, schema);
 }
 
+function emailExists(email, Account) {
+  return Account.findOne({ email: email });
+}
+
 module.exports.validateRegister = validateRegister;
 module.exports.validateLogin = validateLogin;
+module.exports.emailExists = emailExists;

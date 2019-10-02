@@ -1,5 +1,6 @@
 const express = require("express");
 const Account = require("../models/Account");
+const bcrypt = require("bcryptjs");
 const validation = require("../validation");
 
 const router = express.Router();
@@ -26,15 +27,28 @@ router.get("/:accountId", async (req, res) => {
 
 // Create an account
 router.post("/register", async (req, res) => {
+  // Validate account info
   const { error } = validation.validateRegister(req.body);
   if (error) {
     res.status(400).send(error.details[0].message);
     return;
   }
 
+  // Check if account exists
+  const emailExists = await validation.emailExists(req.body.email, Account);
+  if (emailExists) {
+    res.status(400).send("Email already exists");
+    return;
+  }
+
+  // Hash the password
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(req.body.password, salt);
+
+  // Creates the account
   const account = new Account({
     email: req.body.email,
-    password: req.body.password,
+    password: hashPassword,
     name: req.body.name,
     description: req.body.description,
     role: req.body.role
@@ -42,7 +56,7 @@ router.post("/register", async (req, res) => {
 
   try {
     const savedAccount = await account.save();
-    res.json(savedAccount);
+    res.json({ account: account.id });
   } catch (err) {
     res.status(400).json({ message: error });
   }
