@@ -3,10 +3,13 @@ const mongoose = require("mongoose");
 const path = require("path");
 require("dotenv/config");
 
+// Middleware
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname + "/../frontend")));
 
+// Front Page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/../frontend/index.html"));
 });

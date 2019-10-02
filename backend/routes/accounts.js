@@ -1,5 +1,6 @@
 const express = require("express");
 const Account = require("../models/Account");
+const validation = require("../validation");
 
 const router = express.Router();
 
@@ -19,12 +20,18 @@ router.get("/:accountId", async (req, res) => {
     const account = await Account.findById(req.params.accountId);
     res.json(account);
   } catch (err) {
-    res.status(404).send("Account not found");
+    res.status(204).send("Account not found");
   }
 });
 
 // Create an account
-router.post("/", async (req, res) => {
+router.post("/register", async (req, res) => {
+  const { error } = validation.validateRegister(req.body);
+  if (error) {
+    res.status(400).send(error.details[0].message);
+    return;
+  }
+
   const account = new Account({
     email: req.body.email,
     password: req.body.password,
@@ -37,7 +44,7 @@ router.post("/", async (req, res) => {
     const savedAccount = await account.save();
     res.json(savedAccount);
   } catch (err) {
-    res.json({ message: error });
+    res.status(400).json({ message: error });
   }
 });
 
@@ -47,7 +54,7 @@ router.delete("/:accountId", async (req, res) => {
     const removedAccount = await Account.remove({ _id: req.params.accountId });
     res.json(removedAccount);
   } catch (err) {
-    res.status(404).send("Account not found");
+    res.status(204).send("Account not found");
   }
 });
 
@@ -60,7 +67,7 @@ router.patch("/:accountId", async (req, res) => {
     );
     res.json(updateAccount);
   } catch (err) {
-    res.status(404).send("Account not found");
+    res.status(204).send("Account not found");
   }
 });
 
