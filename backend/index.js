@@ -19,8 +19,10 @@ const accountRoute = require("./routes/accounts");
 app.use("/accounts", accountRoute);
 
 // Database
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
-  console.log("Connected to DB")
+mongoose.connect(
+  process.env.DB_CONNECTION,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => console.log("Connected to DB")
 );
 
 const port = process.env.PORT || 3000;

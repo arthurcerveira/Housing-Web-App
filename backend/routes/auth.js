@@ -2,6 +2,7 @@ const express = require("express");
 const Account = require("../models/Account");
 const bcrypt = require("bcryptjs");
 const validation = require("../validation");
+const jwt = require("jsonwebtoken");
 
 const authRouter = express.Router();
 
@@ -71,7 +72,9 @@ authRouter.post("/login", async (req, res) => {
     return;
   }
 
-  return res.status(200).send("Logged in");
+  // Create a token
+  const token = jwt.sign({ _id: account._id }, process.env.TOKEN_SECRET);
+  res.header("auth-token", token).send(token);
 });
 
 module.exports = authRouter;

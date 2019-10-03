@@ -3,7 +3,7 @@ const Account = require("../models/Account");
 
 const accountsRouter = express.Router();
 
-const authRouter = require("../routes/auth");
+const authRouter = require("./auth");
 accountsRouter.use("/", authRouter);
 
 // Get all accounts
