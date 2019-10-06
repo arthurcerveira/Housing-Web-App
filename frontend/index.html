@@ -1,48 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Housing</title>
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <header></header>
-    <body>
-      <div>
-        <input type="email" placeholder="Email" id="email" />
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-light sticky-top">
+      <div class="container-fluid">
+        <h1 class="logo">Housing Web App</h1>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item-active">
+              <a class="nav-link" href="#"><p class="nav-text">Home</p></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="#"><p class="nav-text">Sign in</p></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><p class="nav-text">Register</p></a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <input type="password" placeholder="Password" id="password" />
+    </nav>
+    <!--- Image Slider -->
+    <div id="slides" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="assets/world.jpg" alt="First slide" />
+          <div class="carousel-caption">
+            <h1 class="display-2">Housing</h1>
+            <h3>
+              A solution for connecting international students with host
+              families and local students
+            </h3>
+            <button type="button" class="btn btn-outline-light btn-lg">
+              Find International Student
+            </button>
+            <button type="button" class="btn btn-primary btn-lg">
+              Find Host Family
+            </button>
+          </div>
+        </div>
       </div>
-      <div>
-        <input type="text" placeholder="Name" id="name" />
-      </div>
-      <div>
-        <input type="text" placeholder="Description" id="description" />
-      </div>
-      <div>
-        <select id="role">
-          <option value=""></option>
-          <option value="Amigo Universitário">Amigo Universitário</option>
-          <option value="Host Family">Host Family</option>
-          <option value="International Students">International Students</option>
-        </select>
-      </div>
-      <div>
-        <button onclick="manager.createAccount()">Create Account</button>
-      </div>
+    </div>
 
-      <p class="warning"></p>
-
-      <div>
-        <button onclick="manager.displayAccounts()">Display Accounts</button>
-      </div>
-      <ul class="accounts"></ul>
-
-      <script src="script.js"></script>
-    </body>
-    <footer></footer>
+    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
   </body>
 </html>
