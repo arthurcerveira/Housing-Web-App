@@ -9,15 +9,14 @@ body {
 }
 
 nav {
-  background-color: #3f3f3f;
+  position: absolute;
 }
-
 .nav-text {
   color: #b4b4b4;
 }
 
 .navbar {
-  padding: 0.4rem;
+  padding: 0.2rem;
 }
 
 .navbar-nav li {
@@ -36,9 +35,11 @@ h1.logo {
 }
 
 .carousel-inner img {
-  height: 100%;
+  height: auto;
   width: 100%;
+}
 
+.blur {
   filter: blur(3px);
   -webkit-filter: blur(3px);
 }
@@ -65,20 +66,17 @@ h1.logo {
   width: 300px;
   margin-top: 40px;
   margin-left: 20px;
+  align-self: center;
 }
 
 .carousel-inner {
   background-color: #3f3f3f;
-  color: #d5d5d5;
 }
 
 /*---Media Queries --*/
 @media (max-width: 992px) {
 }
 @media (max-width: 768px) {
-  .carousel-inner {
-    height: 670px;
-  }
   .card-title {
     font-size: 115%;
   }
@@ -87,8 +85,62 @@ h1.logo {
   }
 }
 @media (max-width: 576px) {
-  .carousel-inner {
-    height: 600px;
+  h1.logo {
+    font-weight: 300;
+    color: #b4b4b4;
+    letter-spacing: -2px;
+    font-family: "Roboto", sans-serif;
+    font-size: 200%;
+    padding-left: 10px;
+  }
+
+  .carousel-caption h1 {
+    font-size: 400%;
+  }
+
+  .carousel-caption {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-60%);
+  }
+
+  .carousel-inner img {
+    width: 1000px;
+    height: 450px;
+    overflow: hidden;
+    align-self: center;
+  }
+
+  .carousel-caption h3 {
+    font-size: 120%;
+    font-weight: 500;
+    text-shadow: 1px 1px 10px #000;
+  }
+
+  .carousel-caption button {
+    font-size: 110%;
+    display: block;
+    align-self: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .carousel-caption h1 {
+    font-size: 350%;
+    align-self: center;
+  }
+
+  .carousel-caption h3 {
+    font-size: 110%;
+    font-weight: 500;
+    text-shadow: 1px 1px 10px #000;
+  }
+
+  .carousel-caption button {
+    font-size: 95%;
+    display: block;
+    align-self: center;
+    width: 100%;
   }
 }
 

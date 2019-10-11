@@ -12,9 +12,9 @@
   </head>
   <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-md navbar-light sticky-top">
-      <div class="container-fluid">
-        <h1 class="logo">Housing Web App</h1>
+    <nav class="navbar navbar-expand-md navbar-light sticky-top bg-dark">
+      <div class="container-fluid bg-dark">
+        <h1 class="logo ">Housing Web App</h1>
         <button
           class="navbar-toggler"
           type="button"
@@ -26,13 +26,24 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item-active">
-              <a class="nav-link" href="#"><p class="nav-text">Home</p></a>
+              <a class="nav-link" href="#">
+                <p class="nav-text">For International Students</p>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="#"><p class="nav-text">Sign in</p></a>
+              <a class="nav-link " href="#">
+                <p class="nav-text">For Host Families</p>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><p class="nav-text">Register</p></a>
+              <a class="nav-link" href="#"
+                ><p class="nav-text">For Local Students</p></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="#">
+                <p class="nav-text">Sign in</p>
+              </a>
             </li>
           </ul>
         </div>
@@ -42,19 +53,24 @@
     <div id="slides" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="assets/world.jpg" alt="First slide" />
+          <img src="assets/world.jpg" alt="First slide" class="blur" />
           <div class="carousel-caption">
             <h1 class="display-2">Housing</h1>
             <h3>
               A solution for connecting international students with host
               families and local students
             </h3>
-            <button type="button" class="btn btn-outline-light btn-lg">
-              Find International Student
-            </button>
-            <button type="button" class="btn btn-primary btn-lg">
-              Find Host Family
-            </button>
+            <div style="text-align:center;">
+              <button
+                type="button"
+                class="btn btn-outline-light btn-lg shadow-sm"
+              >
+                Find International Student
+              </button>
+              <button type="button" class="btn btn-primary btn-lg ">
+                Find Host Family
+              </button>
+            </div>
           </div>
         </div>
       </div>
