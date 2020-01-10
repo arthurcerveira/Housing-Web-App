@@ -1,21 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const path = require("path");
 require("dotenv").config();
 
 // Middleware
 const app = express();
+app.use(express.static("dist"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Front Page
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.get("/api", (req, res) => {
+  res.send({ message: "Hello World" });
 });
 
 // Routes
 const accountRoute = require("./routes/accounts");
-app.use("/accounts", accountRoute);
+app.use("/api/accounts", accountRoute);
 
 // Database
 mongoose.connect(
@@ -25,4 +25,4 @@ mongoose.connect(
 );
 
 const port = process.env.PORT || 8080;
-app.listen(port);
+app.listen(port, () => console.log(`Listening on port ${port}`));
