@@ -7,11 +7,10 @@ require("dotenv").config();
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname + "/../frontend")));
 
 // Front Page
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/../frontend/index.html"));
+  res.send("Hello World");
 });
 
 // Routes
@@ -25,5 +24,5 @@ mongoose.connect(
   () => console.log("Connected to DB")
 );
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 app.listen(port);
