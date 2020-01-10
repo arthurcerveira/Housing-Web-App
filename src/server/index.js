@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-require("dotenv/config");
+require("dotenv").config();
 
 // Middleware
 const app = express();
@@ -25,5 +25,5 @@ mongoose.connect(
   () => console.log("Connected to DB")
 );
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.listen(port);
