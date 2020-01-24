@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Front Page
 app.get("/api", (req, res) => {
-  res.send({ message: "Hello World" });
+  res.send({ message: "Server is running" });
 });
 
 // Routes

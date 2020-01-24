@@ -29,7 +29,9 @@ accountsRouter.get("/:accountId", async (req, res) => {
 // Delete an account
 accountsRouter.delete("/:accountId", async (req, res) => {
   try {
-    const removedAccount = await Account.remove({ _id: req.params.accountId });
+    const removedAccount = await Account.deleteOne({
+      _id: req.params.accountId
+    });
     res.json(removedAccount);
   } catch (err) {
     res.status(204).send("Account not found");

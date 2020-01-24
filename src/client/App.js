@@ -5,7 +5,7 @@ import "./app.css";
 
 export default class App extends Component {
   state = {
-    message: "did not work"
+    message: ""
   };
 
   async componentDidMount() {

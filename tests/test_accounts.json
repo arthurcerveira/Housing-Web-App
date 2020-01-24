@@ -1,0 +1,71 @@
+{
+  "valid_accounts": [
+    {
+      "name": "arthur",
+      "email": "arthur@email.com",
+      "password": "senha",
+      "description": "gosta de estudar",
+      "role": "estudante internacional"
+    },
+    {
+      "name": "alves",
+      "email": "alves@email.com",
+      "password": "senha",
+      "description": "gosta de animais",
+      "role": "amigo universitario"
+    },
+    {
+      "name": "cerveira",
+      "email": "cerveira@email.com",
+      "password": "senha",
+      "description": "gosta de cozinhar",
+      "role": "host family"
+    }
+  ],
+
+  "invalid_accounts": [
+    {
+      "name": "no email",
+      "email": "",
+      "password": "senha",
+      "description": "descrição",
+      "role": "estudante internacional"
+    },
+    {
+      "name": "",
+      "email": "no_name@email.com",
+      "password": "senha",
+      "description": "descrição",
+      "role": "estudante internacional"
+    },
+    {
+      "name": "no password",
+      "email": "nome@email.com",
+      "password": "",
+      "description": "descrição",
+      "role": "estudante internacional"
+    },
+    {
+      "name": "no description",
+      "email": "nome@email.com",
+      "password": "senha",
+      "description": "",
+      "role": "estudante internacional"
+    },
+    {
+      "name": "no role",
+      "email": "nome@email.com",
+      "password": "senha",
+      "description": "descrição",
+      "role": ""
+    }
+  ],
+
+  "email_exists": {
+    "name": "email exist",
+    "email": "cerveira@email.com",
+    "password": "senha",
+    "description": "descrição",
+    "role": "amigo universitario"
+  }
+}
