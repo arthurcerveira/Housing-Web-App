@@ -11,14 +11,14 @@ authRouter.post("/register", async (req, res) => {
   // Validate account info
   const { error } = validation.validateRegister(req.body);
   if (error) {
-    res.status(400).json({ message: error.details[0].message });
+    res.status(400).json({ error: error.details[0].message });
     return;
   }
 
   // Check if account exists
   const emailExists = await validation.emailExists(req.body.email, Account);
   if (emailExists) {
-    res.status(400).json({ message: "Email already exists" });
+    res.status(400).json({ error: "Email already exists" });
     return;
   }
 
