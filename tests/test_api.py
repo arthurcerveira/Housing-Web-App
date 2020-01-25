@@ -16,7 +16,7 @@ class TestApi(unittest.TestCase):
     def test1_api_is_running(self):
         response = requests.get(API).json()
 
-        self.assertEqual(response['message'], 'Server is running')
+        self.assertEqual(response['message'], 'Server s running')
 
     def test2_create_account(self):
         # Create valid accounts

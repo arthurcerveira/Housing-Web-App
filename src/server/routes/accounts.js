@@ -22,7 +22,6 @@ accountsRouter.get("/:accountId", async (req, res) => {
     const account = await Account.findById(req.params.accountId);
     res.json(account);
   } catch (err) {
-    console.log(err);
     res.status(204).send("Account not found");
   }
 });
@@ -35,7 +34,6 @@ accountsRouter.delete("/:accountId", async (req, res) => {
     });
     res.json(removedAccount);
   } catch (err) {
-    console.log(err);
     res.status(204).json({ message: "Account not found" });
   }
 });
