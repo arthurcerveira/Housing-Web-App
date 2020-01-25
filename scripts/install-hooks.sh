@@ -6,6 +6,14 @@ GIT_DIR=$(git rev-parse --git-dir)
 cd ~/Desktop/GitHub/Housing-Web-App
 
 echo "Installing hooks..."
-# This command creates symlink to our pre-commit script
-ln -s ./scripts/pre-commit.sh $GIT_DIR/hooks/pre-commit
+
+FILE=$GIT_DIR/hooks/pre-commit
+
+# If pre-commit already exists, overwrite it
+if test -f "$FILE"; then
+    rm $FILE
+fi
+
+cp -l ./scripts/pre-commit.sh $FILE
+
 echo "Done!"
