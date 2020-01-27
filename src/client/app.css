@@ -6,3 +6,9 @@ body {
   text-align: center;
   margin: auto;
 }
+
+.App {
+  padding-top: 4rem;
+  min-height: 100vh;
+  background-color: #fafafa;
+}
