@@ -29,6 +29,20 @@ const accountSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  likes: {
+    id: [
+      {
+        type: String
+      }
+    ]
+  },
+  matches: {
+    id: [
+      {
+        type: String
+      }
+    ]
+  },
   date: {
     type: Date,
     default: Date.now
