@@ -12,14 +12,14 @@
       "email": "alves@email.com",
       "password": "senha",
       "description": "gosta de animais",
-      "role": "amigo universitario"
+      "role": "estudante internacional"
     },
     {
       "name": "cerveira",
       "email": "cerveira@email.com",
       "password": "senha",
       "description": "gosta de cozinhar",
-      "role": "host family"
+      "role": "familia anfitriã"
     }
   ],
 
