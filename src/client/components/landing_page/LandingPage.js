@@ -6,7 +6,6 @@ class LandingPage extends Component {
     return (
       <div>
         <h2>Landing Page</h2>
-        <Link to="/users">Users</Link>
       </div>
     );
   }

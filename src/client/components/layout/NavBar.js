@@ -25,6 +25,9 @@ class NavBar extends Component {
               Housing
             </a>
           </StyledLink>
+          <StyledLink to="/users">
+            <a className="navbar-brand col-md-2  float-right">Users</a>
+          </StyledLink>
         </nav>
       </div>
     );
