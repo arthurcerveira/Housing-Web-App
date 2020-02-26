@@ -5,7 +5,7 @@ class LandingPage extends Component {
   render() {
     return (
       <div>
-        <h2>Landing Page</h2>
+        <h2 className="landing-page">Landing Page</h2>
       </div>
     );
   }

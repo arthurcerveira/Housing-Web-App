@@ -20,3 +20,26 @@ body {
 .server-is-running-warning {
   padding-top: 5rem;
 }
+
+.landing-page {
+  padding: 5rem;
+  background-color: lightgray;
+}
+
+.loading {
+  padding: 5rem;
+}
+
+.login {
+  padding-top: 5rem;
+}
+
+.register {
+  padding-top: 5rem;
+}
+
+.loading-text {
+  display: "flex";
+  justify-content: "center";
+  padding-bottom: 1rem;
+}

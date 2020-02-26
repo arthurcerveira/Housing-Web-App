@@ -12,6 +12,9 @@ import LandingPage from "./components/landing_page/LandingPage";
 import UserDashboard from "./components/users/UserDashboard";
 import User from "./components/users/User";
 
+import Login from "./components/authentication/Login";
+import Register from "./components/authentication/Register";
+
 export default class App extends Component {
   state = {
     api: "/api",
@@ -34,6 +37,8 @@ export default class App extends Component {
               <Route exact path="/" component={LandingPage} />
               <Route exact path="/users" component={UserDashboard} />
               <Route exact path="/users/:userId" component={User} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
             </Switch>
             <div className="server-status">{this.serverIsRunning()}</div>
           </div>
@@ -44,7 +49,7 @@ export default class App extends Component {
 
   serverIsRunning() {
     return (
-      <div className="server-is-running-warning">
+      <div className="server-is-running-warning fixed-bottom">
         {this.state.message ? (
           <h5 className="alert alert-success" role="alert">
             {this.state.message}
@@ -56,5 +61,9 @@ export default class App extends Component {
         )}
       </div>
     );
+  }
+
+  databaseIsConnected() {
+    pass;
   }
 }

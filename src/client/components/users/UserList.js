@@ -30,15 +30,8 @@ class UserList extends Component {
             ))}
           </div>
         ) : (
-          <div class="loading">
-            <h1
-              style={{
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              Loading Users
-            </h1>
+          <div className="loading">
+            <h3 className="loading-text">Loading Users</h3>
             <div
               className="spinner-border mx-auto"
               style={{
