@@ -13,5 +13,5 @@ try:
 
     print(f"Removed {lenght} accounts")
 
-except ConnectionRefusedError:
+except:
     print("Server is not running")

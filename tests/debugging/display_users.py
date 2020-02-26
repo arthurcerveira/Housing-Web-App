@@ -9,5 +9,5 @@ try:
 
     pprint.pprint(accounts)
 
-except ConnectionRefusedError:
+except:
     print("Server is not running")
