@@ -8,19 +8,6 @@ const ProfilePicture = styled.img`
   display: none;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  &:focus,
-  &:hover,
-  &:link,
-  &:visited,
-  &:active {
-    text-decoration: none;
-    color: black;
-  }
-`;
-
 const Card = styled.div`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -57,7 +44,7 @@ class UserCard extends Component {
   render() {
     return (
       <div className="col-md-3 col-sm-6 mb-5">
-        <StyledLink to={`users/${this.state.id}`}>
+        <Link className="styled-link black-text" to={`users/${this.state.id}`}>
           <Card className="card">
             <h5 className="card-header text-capitalize">
               <b>{this.state.name}</b>
@@ -81,7 +68,7 @@ class UserCard extends Component {
               {this.state.role}
             </div>
           </Card>
-        </StyledLink>
+        </Link>
       </div>
     );
   }

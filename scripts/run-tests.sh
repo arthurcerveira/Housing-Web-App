@@ -3,7 +3,7 @@
 # Goes to the root of the project
 cd ~/Desktop/GitHub/Housing-Web-App
 
-URL="http://localhost:8080/api/"
+URL="http://localhost:8000/api/"
 
 # Check if the server is running
 serverResponse=`wget --server-response --max-redirect=0 ${URL} 2>&1`
@@ -15,7 +15,7 @@ then
 
     npm run server &
 
-    sleep 5s
+    sleep 10s
 fi
 
 echo ""

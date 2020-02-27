@@ -1,6 +1,6 @@
 import requests
 
-API = 'http://localhost:8080/api/'
+API = 'http://localhost:8000/api/'
 
 try:
     response = requests.get(f'{API}accounts/')

@@ -17,45 +17,67 @@ const StyledLink = styled(Link)`
 
 class NavBar extends Component {
   state = {
-    Links: [
-      { to: "/users", text: "Users" },
-      { to: "/login", text: "Sign in" },
-      { to: "/register", text: "Sign up" }
+    links: [
+      { to: "/users", text: "Usuários" },
+      { to: "/login", text: "Login" },
+      { to: "/register", text: "Registrar" }
     ]
   };
 
-  renderNavLinks() {
-    return this.state.Links.map(link => (
-      <li className="nav-item">
-        <StyledLink to={link.to}>
-          <a className="nav-link">{link.text}</a>
+  renderNavLinks(to, text) {
+    return (
+      <li className="nav-item" key={text}>
+        <StyledLink to={to} className="nav-link">
+          {text}
         </StyledLink>
       </li>
-    ));
+    );
+  }
+
+  renderNavDropdowns() {
+    return (
+      <li className="nav-item dropdown">
+        <a
+          className="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Dropdown
+        </a>
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a className="dropdown-item" href="#">
+            Action
+          </a>
+          <a className="dropdown-item" href="#">
+            Another action
+          </a>
+          <div className="dropdown-divider"></div>
+          <a className="dropdown-item" href="#">
+            Something else here
+          </a>
+        </div>
+      </li>
+    );
   }
 
   render() {
     return (
       <div>
         <nav className="navbar navbar-expand-md fixed-top bg-dark navbar-dark">
-          <StyledLink to="/">
-            <a className="navbar-brand col-sn-5 col-md-2 mr-0 align-items-center">
-              Housing
-            </a>
+          <StyledLink to="/" className="align-items-center">
+            <span className="col-sn-5 mr-0 col-md-2 navbar-brand">Housing</span>
           </StyledLink>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="ml-5 collapse navbar-collapse">
-            <ul className="navbar-nav">{this.renderNavLinks()}</ul>
+          <div className="col-md-11 collapse navbar-collapse justify-content-end">
+            <ul className="navbar-nav ">
+              {this.state.links.map(link =>
+                this.renderNavLinks(link.to, link.text)
+              )}
+              {this.renderNavDropdowns()}
+            </ul>
           </div>
         </nav>
       </div>

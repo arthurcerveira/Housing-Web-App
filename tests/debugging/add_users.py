@@ -1,7 +1,7 @@
 import requests
 import json
 
-API = 'http://localhost:8080/api/'
+API = 'http://localhost:8000/api/'
 
 with open('../test_accounts.json') as accounts:
     ACCOUNTS = json.load(accounts)

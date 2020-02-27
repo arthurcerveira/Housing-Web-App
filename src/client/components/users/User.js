@@ -54,7 +54,7 @@ class User extends Component {
                 </h4>
                 <div className="row align-items-center">
                   <div className={`row col-12 col-md-3`}>
-                    <p className="text-muted">Description: </p>
+                    <p className="text-muted">Descrição: </p>
                     <p>{this.state.description}</p>
                   </div>
                 </div>

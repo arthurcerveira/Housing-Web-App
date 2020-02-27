@@ -22,7 +22,8 @@ body {
 }
 
 .landing-page {
-  padding: 5rem;
+  padding: 10rem;
+  margin: 1rem;
   background-color: lightgray;
 }
 
@@ -42,4 +43,29 @@ body {
   display: "flex";
   justify-content: "center";
   padding-bottom: 1rem;
+}
+
+.no-users {
+  padding-top: 5rem;
+  display: "flex";
+  justify-content: "center";
+}
+
+.btn-register {
+  margin: 2rem;
+  width: 15rem;
+}
+
+.styled-link,
+.styled-link:focus,
+.styled-link:hover,
+.styled-link:link,
+.styled-link:visited,
+.styled-link:active {
+  text-decoration: none;
+  color: white;
+}
+
+.black-text {
+  color: black !important;
 }

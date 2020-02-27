@@ -40,8 +40,8 @@ export default class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
             </Switch>
-            <div className="server-status">{this.serverIsRunning()}</div>
           </div>
+          <div className="server-status">{this.serverIsRunning()}</div>
         </div>
       </Router>
     );
