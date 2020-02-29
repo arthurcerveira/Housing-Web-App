@@ -21,6 +21,11 @@ class TestApi(unittest.TestCase):
     def test_create_account(self):
         accounts_id = list()
 
+        # Remove all accounts before starting the test
+        accounts = requests.get(f'{API}accounts/').json()
+        for account in accounts:
+            requests.delete(f'{API}accounts/{account["_id"]}')
+
         # Create valid accounts
         for account in VALID_ACCOUNTS:
             response = requests.post(f'{API}accounts/register', data=account)
