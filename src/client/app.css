@@ -69,3 +69,11 @@ body {
 .black-text {
   color: black !important;
 }
+
+.user-list {
+  background-color: #fafafa;
+}
+
+.filter {
+  padding: 2rem;
+}
