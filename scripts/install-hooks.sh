@@ -3,7 +3,9 @@
 GIT_DIR=$(git rev-parse --git-dir)
 
 # Goes to the root of the project
-cd ~/Desktop/GitHub/Housing-Web-App
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd $DIR
+cd ..
 
 echo "Installing hooks..."
 
