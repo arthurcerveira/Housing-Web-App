@@ -23,12 +23,15 @@ class UserList extends Component {
       roleFilter = "";
     }
 
-    if (roleFilter === "familia") {
-      roleFilter = "familia anfitriã";
-    }
-
-    if (roleFilter === "estudante") {
-      roleFilter = "estudante internacional";
+    switch (roleFilter) {
+      case "familia":
+        roleFilter = "familia anfitriã";
+        break;
+      case "estudante":
+        roleFilter = "estudante internacional";
+        break;
+      default:
+        roleFilter = "";
     }
 
     this.setState({ users: res.data, userIsEmpty, roleFilter });
@@ -72,7 +75,8 @@ class UserList extends Component {
                 <div className="col-md-3">
                   <input
                     type="text"
-                    className="form-control text-muted"
+                    className="form-control"
+                    placeholder="Nome"
                     value={this.state.nameFilter}
                     onChange={this.updateNameFilter.bind(this)}
                   />
@@ -80,6 +84,7 @@ class UserList extends Component {
                 <div className="col-md-3">
                   <select
                     className="text-capitalize form-control"
+                    value={this.state.roleFilter}
                     onChange={this.updateRoleFilter.bind(this)}
                   >
                     <option></option>

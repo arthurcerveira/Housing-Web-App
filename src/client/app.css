@@ -36,7 +36,7 @@ body {
 }
 
 .register {
-  padding-top: 5rem;
+  padding-top: 3rem;
 }
 
 .loading-text {
@@ -76,4 +76,25 @@ body {
 
 .filter {
   padding: 2rem;
+}
+
+.register-form {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+textarea {
+  resize: none;
+}
+
+.select-role {
+  margin-top: 1.7rem;
+}
+
+.cadastro-text {
+  margin-bottom: 1rem;
+}
+
+.botao-registrar {
+  margin-top: 2rem;
 }
