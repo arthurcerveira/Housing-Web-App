@@ -8,26 +8,58 @@ class UserList extends Component {
     url: "/api/accounts/",
     users: [],
     userIsEmpty: false,
-    nameFilter: ""
+    nameFilter: "",
+    roleFilter: ""
   };
 
   async componentDidMount() {
     const res = await axios.get(this.state.url);
     const userIsEmpty = Object.keys(res.data).length === 0;
+    let roleFilter = "";
 
-    this.setState({ users: res.data, userIsEmpty });
+    try {
+      roleFilter = window.location.href.split("=")[1];
+    } catch (err) {
+      roleFilter = "";
+    }
+
+    if (roleFilter === "familia") {
+      roleFilter = "familia anfitriã";
+    }
+
+    if (roleFilter === "estudante") {
+      roleFilter = "estudante internacional";
+    }
+
+    this.setState({ users: res.data, userIsEmpty, roleFilter });
   }
 
   updateNameFilter(event) {
     this.setState({ nameFilter: event.target.value });
   }
 
-  render() {
-    let filteredUsers = this.state.users.filter(
+  updateRoleFilter(event) {
+    this.setState({ roleFilter: event.target.value });
+  }
+
+  filterUsers() {
+    let filteredUsers = this.state.users;
+
+    filteredUsers = filteredUsers.filter(
       user =>
         user.name.toLowerCase().indexOf(this.state.nameFilter.toLowerCase()) !==
         -1
     );
+
+    filteredUsers = filteredUsers.filter(user =>
+      this.state.roleFilter ? user.role === this.state.roleFilter : true
+    );
+
+    return filteredUsers;
+  }
+
+  render() {
+    let filteredUsers = this.filterUsers();
 
     return (
       <React.Fragment>
@@ -37,13 +69,23 @@ class UserList extends Component {
           ) : (
             <div className="user-list">
               <div className="row filter">
-                <div className="col-md-2">
+                <div className="col-md-3">
                   <input
                     type="text"
                     className="form-control text-muted"
                     value={this.state.nameFilter}
                     onChange={this.updateNameFilter.bind(this)}
                   />
+                </div>
+                <div className="col-md-3">
+                  <select
+                    className="text-capitalize form-control"
+                    onChange={this.updateRoleFilter.bind(this)}
+                  >
+                    <option></option>
+                    <option>estudante internacional</option>
+                    <option>familia anfitriã</option>
+                  </select>
                 </div>
               </div>
               <div className="row">

@@ -34,36 +34,6 @@ class NavBar extends Component {
     );
   }
 
-  renderNavDropdowns() {
-    return (
-      <li className="nav-item dropdown">
-        <a
-          className="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Dropdown
-        </a>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a className="dropdown-item" href="#">
-            Action
-          </a>
-          <a className="dropdown-item" href="#">
-            Another action
-          </a>
-          <div className="dropdown-divider"></div>
-          <a className="dropdown-item" href="#">
-            Something else here
-          </a>
-        </div>
-      </li>
-    );
-  }
-
   render() {
     return (
       <div>
@@ -76,7 +46,6 @@ class NavBar extends Component {
               {this.state.links.map(link =>
                 this.renderNavLinks(link.to, link.text)
               )}
-              {this.renderNavDropdowns()}
             </ul>
           </div>
         </nav>
