@@ -1,16 +1,16 @@
 {
-  "name": "simple-react-full-stack",
+  "name": "housing",
   "version": "1.0.0",
-  "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
+  "description": "A solution for connecting international students with host families and local students",
   "main": "src/server/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "start": "npm run build && node src/server/index.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "nodemon src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "server": "concurrently \"nodemon src/server/index.js\" \"mongod --dbpath=/data/db\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"mongod --dbpath=/data/db\""
   },
-  "author": "Sandeep Raveesh",
+  "author": "Arthur Cerveira",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.1",
