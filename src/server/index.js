@@ -17,12 +17,19 @@ app.get("/api", (req, res) => {
 const accountRoute = require("./routes/accounts");
 app.use("/api/accounts", accountRoute);
 
+const mongoConncection =
+  process.env.NODE_ENV === "production"
+    ? "mongodb://mongo:27017/housing"
+    : "mongodb://localhost:27017/housing";
+
 // Database
-mongoose.connect(
-  process.env.DB_CONNECTION,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => console.log("Connected to DB")
-);
+mongoose
+  .connect(mongoConncection, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log("Connected to DB"))
+  .catch(err => console.log(err));
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
