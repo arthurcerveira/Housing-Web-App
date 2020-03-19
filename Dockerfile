@@ -1,14 +1,22 @@
-FROM node:10
+FROM python:3
 
 WORKDIR /usr/src/housing
 
-COPY package*.json ./
+# Install node
+RUN apt-get update
+RUN apt-get -y install curl gnupg
+RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
+RUN apt-get -y install nodejs
 
+# Install node packages
+COPY package*.json ./
 RUN npm install
 
-COPY . .
+# Install pip packages
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN npm run build
+COPY . .
 
 CMD ["npm", "start"]
 
