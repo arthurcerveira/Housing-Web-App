@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class Register extends Component {
   state = {
@@ -8,7 +9,10 @@ class Register extends Component {
     email: "",
     password: "",
     description: "",
-    role: ""
+    role: "",
+    id: "",
+    feedback: "",
+    redirect: false
   };
 
   getFormData(event) {
@@ -32,11 +36,21 @@ class Register extends Component {
     axios
       .post(this.state.url, account)
       .then(function(response) {
-        console.log(response);
+        return response.data.account;
+      })
+      .then(accountId => {
+        console.log(accountId);
+        this.setState({ id: accountId, redirect: true });
       })
       .catch(function(error) {
         console.log(error);
       });
+  }
+
+  renderRedirect() {
+    if (this.state.redirect) {
+      return <Redirect to={`/users/${this.state.id}`} />;
+    }
   }
 
   render() {
@@ -119,6 +133,7 @@ class Register extends Component {
             </button>
           </div>
         </form>
+        {this.renderRedirect()}
       </div>
     );
   }
