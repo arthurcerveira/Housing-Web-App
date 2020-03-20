@@ -1,10 +1,13 @@
 import unittest
 import requests
 import json
+import os
+
+FILE_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 API = 'http://localhost:8000/api/'
 
-with open('test_accounts.json') as accounts:
+with open(f'{FILE_DIRECTORY}/test_accounts.json') as accounts:
     ACCOUNTS = json.load(accounts)
 
 VALID_ACCOUNTS = ACCOUNTS['valid_accounts']
