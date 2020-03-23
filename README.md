@@ -4,7 +4,7 @@ Housing is a web application with the objective of connecting international stud
 
 ## Project structure
 
-All the source code will be inside src directory. Inside src, there is client directory containing all frontend code, and server directory for the backend.
+All the source code will be inside the src directory. Inside src, there is the client directory containing all the frontend code, and the server directory for the backend.
 
 The frontend is built with ReactJS using the Bootstrap library and simple CSS for styling. The axios library is responsible for requesting data from the API to the frontend.
 
