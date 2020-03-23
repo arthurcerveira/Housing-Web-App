@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 require("dotenv").config();
 
 // Middleware
@@ -16,6 +17,14 @@ app.get("/api", (req, res) => {
 // Routes
 const accountRoute = require("./routes/accounts");
 app.use("/api/accounts", accountRoute);
+
+if (process.env.NODE_ENV === "production") {
+  console.log("Running server in production settings");
+  // Handles any requests that don't match the ones above
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../../dist/index.html"));
+  });
+}
 
 const mongoConncection =
   process.env.NODE_ENV === "production"
