@@ -8,7 +8,7 @@
     "start": "npm run build && node src/server/index.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "concurrently \"nodemon src/server/index.js\" \"mongod --dbpath=/data/db\"",
-    "dev": "concurrently \"npm run server\" \"npm run client\" \"mongod --dbpath=/data/db\""
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Arthur Cerveira",
   "license": "ISC",
