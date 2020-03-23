@@ -12,8 +12,36 @@ class Register extends Component {
     role: "",
     id: "",
     feedback: "",
-    redirect: false
+    redirect: false,
+    roleFilter: "",
+    readOnly: false
   };
+
+  async componentDidMount() {
+    let roleFilter = "";
+    let readOnly = false;
+
+    try {
+      roleFilter = window.location.href.split("=")[1];
+    } catch (err) {
+      roleFilter = "";
+    }
+
+    switch (roleFilter) {
+      case "familia":
+        roleFilter = "familia anfitriã";
+        readOnly = true;
+        break;
+      case "estudante":
+        roleFilter = "estudante internacional";
+        readOnly = true;
+        break;
+      default:
+        roleFilter = "";
+    }
+
+    this.setState({ roleFilter, readOnly });
+  }
 
   getFormData(event) {
     event.preventDefault();
@@ -45,6 +73,35 @@ class Register extends Component {
       .catch(function(error) {
         console.log(error);
       });
+  }
+
+  roleSelector() {
+    const options = (
+      <React.Fragment>
+        <option>estudante internacional</option>
+        <option>familia anfitriã</option>
+      </React.Fragment>
+    );
+
+    return this.state.readOnly ? (
+      <select
+        className="form-control text-capitalize select-role"
+        value={this.state.roleFilter}
+        ref="role"
+        readOnly
+      >
+        {options}
+      </select>
+    ) : (
+      <select
+        className="form-control text-capitalize select-role"
+        defaultValue={this.state.roleFilter}
+        ref="role"
+      >
+        <option></option>
+        {options}
+      </select>
+    );
   }
 
   renderRedirect() {
@@ -114,16 +171,7 @@ class Register extends Component {
                   ref="description"
                 ></textarea>
               </div>
-              <div className="form-group">
-                <select
-                  className="form-control text-capitalize select-role"
-                  ref="role"
-                >
-                  <option></option>
-                  <option>estudante internacional</option>
-                  <option>familia anfitriã</option>
-                </select>
-              </div>
+              <div className="form-group">{this.roleSelector()}</div>
             </div>
           </div>
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class User extends Component {
   state = {
@@ -32,11 +33,20 @@ class User extends Component {
       <div className="col">
         <div className="card">
           <div className="card-header">
-            <div className="row">
+            <div className="row align-items-center">
               <div className="col-5">
                 <h5 className="float-left text-capitalize text-muted">
                   {this.state.role}
                 </h5>
+              </div>
+              <div className="col-7">
+                <div className="float-right">
+                  <Link to="/register?role=estudante">
+                    <button type="button" className="btn btn-primary">
+                      Entrar em contato
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
