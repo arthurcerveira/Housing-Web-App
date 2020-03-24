@@ -5,11 +5,6 @@ import api from "../../sevices/api";
 class Register extends Component {
   state = {
     url: "/api/accounts/register",
-    name: "",
-    email: "",
-    password: "",
-    description: "",
-    role: "",
     id: "",
     feedback: "",
     redirect: false,
@@ -72,6 +67,7 @@ class Register extends Component {
       })
       .catch(function(error) {
         console.log(error);
+        this.setState({ feedback: "Houve um erro" });
       });
   }
 
@@ -187,6 +183,7 @@ class Register extends Component {
               Cadastrar
             </button>
           </div>
+          {this.state.feedback && <p>{this.state.feedback}</p>}
         </form>
         {this.renderRedirect()}
       </div>
