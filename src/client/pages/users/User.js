@@ -9,8 +9,7 @@ class User extends Component {
     role: "",
     description: "",
     userId: "",
-    likes: "",
-    matches: ""
+    toRegister: ""
   };
 
   async componentDidMount() {
@@ -22,10 +21,13 @@ class User extends Component {
     const name = res.data.name;
     const role = res.data.role;
     const description = res.data.description;
-    const likes = res.data.likes;
-    const matches = res.data.matches;
 
-    this.setState({ name, role, description, likes, matches });
+    const toRegister =
+      role === "estudante internacional"
+        ? "/register?role=familia"
+        : "/register?role=estudante";
+
+    this.setState({ name, role, description, toRegister });
   }
 
   render() {
@@ -41,7 +43,7 @@ class User extends Component {
               </div>
               <div className="col-7">
                 <div className="float-right">
-                  <Link to="/register?role=estudante">
+                  <Link to={this.state.toRegister}>
                     <button type="button" className="btn btn-primary">
                       Entrar em contato
                     </button>

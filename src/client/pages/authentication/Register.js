@@ -106,7 +106,14 @@ class Register extends Component {
 
   renderRedirect() {
     if (this.state.redirect) {
-      return <Redirect to={`/users/${this.state.id}`} />;
+      return (
+        <Redirect
+          to={{
+            pathname: `/users/${this.state.id}`,
+            state: { from: this.props.location }
+          }}
+        />
+      );
     }
   }
 

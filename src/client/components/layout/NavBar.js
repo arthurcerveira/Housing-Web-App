@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 class NavBar extends Component {
   state = {
     links: [
-      { to: "/users", text: "Usuários" },
+      // { to: "/users", text: "Usuários" },
       { to: "/login", text: "Entrar" },
       { to: "/register", text: "Cadastrar" }
     ]
   };
 
-  renderNavLinks(to, text) {
+  renderNavLink(to, text) {
     return (
       <li className="nav-item" key={text}>
         <Link to={to} className="nav-link styled-link">
@@ -30,7 +30,7 @@ class NavBar extends Component {
           <div className="col-md-11 collapse navbar-collapse justify-content-end">
             <ul className="navbar-nav ">
               {this.state.links.map(link =>
-                this.renderNavLinks(link.to, link.text)
+                this.renderNavLink(link.to, link.text)
               )}
             </ul>
           </div>

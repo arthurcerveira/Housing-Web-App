@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import "./app.css";
 import NavBar from "./components/layout/NavBar";
 
-import LandingPage from "./components/landing_page/LandingPage";
-
-import UserDashboard from "./components/users/UserDashboard";
-import User from "./components/users/User";
-
-import Login from "./components/authentication/Login";
-import Register from "./components/authentication/Register";
+import Routes from "./routes";
 
 export default class App extends Component {
   state = {
@@ -33,13 +26,7 @@ export default class App extends Component {
         <div className="App">
           <NavBar />
           <div className="container">
-            <Switch>
-              <Route exact path="/" component={LandingPage} />
-              <Route exact path="/users" component={UserDashboard} />
-              <Route exact path="/users/:userId" component={User} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-            </Switch>
+            <Routes />
           </div>
           <div className="server-status">{this.serverIsRunning()}</div>
         </div>
@@ -61,9 +48,5 @@ export default class App extends Component {
         )}
       </div>
     );
-  }
-
-  databaseIsConnected() {
-    pass;
   }
 }
