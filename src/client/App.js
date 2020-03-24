@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import api from "./sevices/api";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -15,7 +15,7 @@ export default class App extends Component {
   };
 
   async componentDidMount() {
-    const res = await axios.get(this.state.api);
+    const res = await api.get(this.state.api);
     console.log(res);
     this.setState({ message: res.data["message"] });
   }

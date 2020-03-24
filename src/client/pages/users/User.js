@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import api from "../../sevices/api";
 import { Link } from "react-router-dom";
 
 class User extends Component {
@@ -17,7 +17,7 @@ class User extends Component {
 
     const userUrl = `/api/accounts/${userId}`;
 
-    const res = await axios.get(userUrl);
+    const res = await api.get(userUrl);
     const name = res.data.name;
     const role = res.data.role;
     const description = res.data.description;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Redirect } from "react-router-dom";
+import api from "../../sevices/api";
 
 class Register extends Component {
   state = {
@@ -61,7 +61,7 @@ class Register extends Component {
   }
 
   createAccount(account) {
-    axios
+    api
       .post(this.state.url, account)
       .then(function(response) {
         return response.data.account;

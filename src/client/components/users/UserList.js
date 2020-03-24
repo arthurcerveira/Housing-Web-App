@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import api from "../../sevices/api";
 
 import UserCard from "./UserCard";
 
@@ -13,7 +13,7 @@ class UserList extends Component {
   };
 
   async componentDidMount() {
-    const res = await axios.get(this.state.url);
+    const res = await api.get(this.state.url);
     const userIsEmpty = Object.keys(res.data).length === 0;
     let roleFilter = "";
 
