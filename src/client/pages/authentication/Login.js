@@ -25,7 +25,8 @@ class Login extends Component {
         password
       });
       login(response.data);
-      this.props.history.push("/");
+      this.props.history.push("/users/");
+      location.reload(true);
     } catch (err) {
       this.setState({
         error: "Senha ou email incorretos"

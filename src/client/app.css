@@ -126,3 +126,14 @@ textarea {
 .login-button {
   padding: 2rem;
 }
+
+.nav-welcome {
+  color: white;
+  padding-right: 1rem;
+}
+
+.nav-picture {
+  height: 7%;
+  width: 7%;
+  border-radius: 50%;
+}

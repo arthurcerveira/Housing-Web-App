@@ -16,7 +16,6 @@ export default class App extends Component {
 
   async componentDidMount() {
     const res = await api.get(this.state.api);
-    console.log(res);
     this.setState({ message: res.data["message"] });
   }
 
