@@ -18,6 +18,9 @@ app.get("/api", (req, res) => {
 const accountRoute = require("./routes/accounts");
 app.use("/api/accounts", accountRoute);
 
+const loggedRoute = require("./routes/logged");
+app.use("/api/logged", loggedRoute);
+
 if (process.env.NODE_ENV === "production") {
   console.log("Running server in production settings");
   // Handles any requests that don't match the ones above
