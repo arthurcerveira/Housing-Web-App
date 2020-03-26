@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import api from "../../sevices/api";
+import { login } from "../../sevices/auth";
 
 class Register extends Component {
   state = {
     url: "/api/accounts/register",
     id: "",
     feedback: "",
-    redirect: false,
     roleFilter: "",
     readOnly: false
   };
@@ -58,16 +57,16 @@ class Register extends Component {
   createAccount(account) {
     api
       .post(this.state.url, account)
-      .then(function(response) {
-        return response.data.account;
-      })
-      .then(accountId => {
-        console.log(accountId);
-        this.setState({ id: accountId, redirect: true });
+      .then(response => {
+        this.setState({ id: response.data.account });
+        alert(
+          "Cadastro realizado com sucesso.\nClique em OK para acessar sua conta"
+        );
+        this.props.history.push("/login");
       })
       .catch(function(error) {
+        alert("Cadastro inválido.\nVerifique suas informações");
         console.log(error);
-        this.setState({ feedback: "Houve um erro" });
       });
   }
 
@@ -100,18 +99,18 @@ class Register extends Component {
     );
   }
 
-  renderRedirect() {
-    if (this.state.redirect) {
-      return (
-        <Redirect
-          to={{
-            pathname: `/users/${this.state.id}`,
-            state: { from: this.props.location }
-          }}
-        />
-      );
-    }
-  }
+  // renderRedirect() {
+  //   if (this.state.redirect) {
+  //     return (
+  //       <Redirect
+  //         to={{
+  //           pathname: `/users/${this.state.id}`,
+  //           state: { from: this.props.location }
+  //         }}
+  //       />
+  //     );
+  //   }
+  // }
 
   render() {
     return (
@@ -185,7 +184,7 @@ class Register extends Component {
           </div>
           {this.state.feedback && <p>{this.state.feedback}</p>}
         </form>
-        {this.renderRedirect()}
+        {/* {this.renderRedirect()} */}
       </div>
     );
   }
