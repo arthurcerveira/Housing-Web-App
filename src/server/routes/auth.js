@@ -37,7 +37,7 @@ authRouter.post("/register", async (req, res) => {
 
   try {
     const savedAccount = await account.save();
-    res.json({ account: account.id });
+    res.json({ account: savedAccount._id });
   } catch (err) {
     res.status(400).json({ message: error });
   }

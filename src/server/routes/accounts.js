@@ -10,9 +10,19 @@ accountsRouter.use("/", authRouter);
 accountsRouter.get("/", async (req, res) => {
   try {
     const accounts = await Account.find();
-    res.json(accounts);
+    accountsFiltered = accounts.map(account => {
+      accountsFiltered = {
+        _id: account._id,
+        name: account.name,
+        role: account.role,
+        description: account.description
+      };
+      return accountsFiltered;
+    });
+
+    res.json(accountsFiltered);
   } catch (err) {
-    res.json({ message: error });
+    res.json({ message: err });
   }
 });
 
@@ -20,7 +30,15 @@ accountsRouter.get("/", async (req, res) => {
 accountsRouter.get("/:accountId", async (req, res) => {
   try {
     const account = await Account.findById(req.params.accountId);
-    res.json(account);
+
+    accountFiltered = {
+      _id: account._id,
+      name: account.name,
+      role: account.role,
+      description: account.description
+    };
+
+    res.json(accountFiltered);
   } catch (err) {
     res.status(204).send("Account not found");
   }
