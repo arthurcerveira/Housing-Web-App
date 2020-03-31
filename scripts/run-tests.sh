@@ -28,7 +28,11 @@ echo ""
 cd tests
 python3.6 -m unittest -v test_api.py
 
-RESULT=$?
+RESULT_API=$?
+
+python3.6 -m unittest -v test_auth.py
+
+RESULT_AUTH=$?
 
 echo ""
 echo "Finshed running tests"
@@ -46,7 +50,7 @@ if test -f "$FILE"; then
 fi
 
 # Returns 1 if the tests failed
-if [ $RESULT -eq 0 ]; then
+if [ $RESULT_API -eq 0 ] && [ $RESULT_AUTH -eq 0 ]; then
     exit 0
 else
     exit 1
