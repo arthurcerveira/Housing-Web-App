@@ -55,7 +55,7 @@ authRouter.post("/login", async (req, res) => {
   // Check if account exists
   const emailExists = await validation.emailExists(req.body.email, Account);
   if (!emailExists) {
-    res.status(400).send("Email not found");
+    res.status(400).json({ error: "Email not found" });
     return;
   }
 
@@ -68,13 +68,13 @@ authRouter.post("/login", async (req, res) => {
     account.password
   );
   if (!validPass) {
-    res.status(400).send("Invalid password");
+    res.status(400).json({ error: "Invalid password" });
     return;
   }
 
   // Create a token
   const token = jwt.sign({ _id: account._id }, process.env.TOKEN_SECRET);
-  res.header("Authorization", token).send(token);
+  res.header("Authorization", token).json({ token: token });
 });
 
 module.exports = authRouter;

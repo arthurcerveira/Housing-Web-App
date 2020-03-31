@@ -9,7 +9,7 @@ loggedRouter.get("/", verify, async (req, res) => {
     const account = await Account.findById(req.account._id);
     res.json(account);
   } catch (err) {
-    res.status(204).send("Account not found");
+    res.status(204).json({ error: "Account not found" });
   }
 });
 

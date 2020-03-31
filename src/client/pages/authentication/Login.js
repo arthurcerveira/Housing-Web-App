@@ -24,7 +24,7 @@ class Login extends Component {
         email,
         password
       });
-      login(response.data);
+      login(response.data.token);
       this.props.history.push("/users/");
       location.reload(true);
     } catch (err) {
