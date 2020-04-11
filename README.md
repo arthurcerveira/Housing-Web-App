@@ -1,6 +1,6 @@
 # Housing
 
-Housing is a web application with the objective of connecting international students who are comming to study at the Federal University of Pelotas with local families who are willing to host them in their homes.
+Housing is a web application with the objective of connecting international students who are comming to study at the Federal University of Pelotas with local families who wish to host them in their homes.
 
 ## Project structure
 
@@ -12,7 +12,7 @@ The backend consists of a REST API implemented in NodeJS with the Express librar
 
 The application is containerized with docker and docker-compose so it can run in an isolated environment and be easily deployed on a cloud platform.
 
-The development of the application is based on TDD, with automated tests implemented in Python and Shell Script. These tests are integrated with git using git-hooks.
+The development of the application is based on TDD, with automated tests implemented in Python. These tests are integrated with git using git-hooks.
 
 ## Installation
 
@@ -57,6 +57,7 @@ And they can also be performed directly from the `tests` directory.
 
 ```bash
 $ python tests/test_api.py
+$ python tests/test_auth.py
 ```
 
 ### Debugging
