@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+
 import api from "../../sevices/api";
+import { isAuthenticated } from "../../sevices/auth";
 
 import UserCard from "./UserCard";
 
@@ -9,7 +11,7 @@ class UserList extends Component {
     users: [],
     userIsEmpty: false,
     nameFilter: "",
-    roleFilter: ""
+    roleFilter: "",
   };
 
   async componentDidMount() {
@@ -17,21 +19,36 @@ class UserList extends Component {
     const userIsEmpty = Object.keys(res.data).length === 0;
     let roleFilter = "";
 
-    try {
-      roleFilter = window.location.href.split("=")[1];
-    } catch (err) {
-      roleFilter = "";
-    }
+    if (isAuthenticated()) {
+      const res = await api.get(`/api/logged`);
 
-    switch (roleFilter) {
-      case "familia":
-        roleFilter = "familia anfitriã";
-        break;
-      case "estudante":
-        roleFilter = "estudante internacional";
-        break;
-      default:
+      let role = res.data.role;
+
+      switch (role) {
+        case "estudante internacional":
+          roleFilter = "familia anfitriã";
+          break;
+        case "familia anfitriã":
+          roleFilter = "estudante internacional";
+          break;
+      }
+    } else {
+      try {
+        roleFilter = window.location.href.split("=")[1];
+      } catch (err) {
         roleFilter = "";
+      }
+
+      switch (roleFilter) {
+        case "familia":
+          roleFilter = "familia anfitriã";
+          break;
+        case "estudante":
+          roleFilter = "estudante internacional";
+          break;
+        default:
+          roleFilter = "";
+      }
     }
 
     this.setState({ users: res.data, userIsEmpty, roleFilter });
@@ -49,16 +66,40 @@ class UserList extends Component {
     let filteredUsers = this.state.users;
 
     filteredUsers = filteredUsers.filter(
-      user =>
+      (user) =>
         user.name.toLowerCase().indexOf(this.state.nameFilter.toLowerCase()) !==
         -1
     );
 
-    filteredUsers = filteredUsers.filter(user =>
+    filteredUsers = filteredUsers.filter((user) =>
       this.state.roleFilter ? user.role === this.state.roleFilter : true
     );
 
     return filteredUsers;
+  }
+
+  renderSelect() {
+    return isAuthenticated() ? (
+      <select
+        className="text-capitalize form-control"
+        value={this.state.roleFilter}
+        readOnly
+      >
+        <option></option>
+        <option>estudante internacional</option>
+        <option>familia anfitriã</option>
+      </select>
+    ) : (
+      <select
+        className="text-capitalize form-control"
+        value={this.state.roleFilter}
+        onChange={this.updateRoleFilter.bind(this)}
+      >
+        <option></option>
+        <option>estudante internacional</option>
+        <option>familia anfitriã</option>
+      </select>
+    );
   }
 
   render() {
@@ -81,20 +122,10 @@ class UserList extends Component {
                     onChange={this.updateNameFilter.bind(this)}
                   />
                 </div>
-                <div className="col-md-3">
-                  <select
-                    className="text-capitalize form-control"
-                    value={this.state.roleFilter}
-                    onChange={this.updateRoleFilter.bind(this)}
-                  >
-                    <option></option>
-                    <option>estudante internacional</option>
-                    <option>familia anfitriã</option>
-                  </select>
-                </div>
+                <div className="col-md-3">{this.renderSelect()}</div>
               </div>
               <div className="row">
-                {filteredUsers.map(user => (
+                {filteredUsers.map((user) => (
                   <UserCard
                     key={user._id}
                     id={user._id}
@@ -112,7 +143,7 @@ class UserList extends Component {
             <div
               className="spinner-border mx-auto"
               style={{
-                display: "flex"
+                display: "flex",
               }}
             ></div>
           </div>

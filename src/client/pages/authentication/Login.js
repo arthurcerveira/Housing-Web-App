@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+
 import api from "../../sevices/api";
-import { login } from "../../sevices/auth";
+import { login, isAuthenticated } from "../../sevices/auth";
 
 class Login extends Component {
   state = { error: "" };
@@ -22,19 +24,19 @@ class Login extends Component {
     try {
       const response = await api.post("/api/accounts/login", {
         email,
-        password
+        password,
       });
       login(response.data.token);
       this.props.history.push("/users/");
       location.reload(true);
     } catch (err) {
       this.setState({
-        error: "Senha ou email incorretos"
+        error: "Senha ou email incorretos",
       });
     }
   }
 
-  render() {
+  renderLogin = () => {
     return (
       <div className="row justify-content-center">
         <div className="register col-md-4">
@@ -74,6 +76,21 @@ class Login extends Component {
         </div>
       </div>
     );
+  };
+
+  renderRedirect = () => {
+    return (
+      <Redirect
+        to={{
+          pathname: "/users",
+          state: { from: this.props.location },
+        }}
+      />
+    );
+  };
+
+  render() {
+    return isAuthenticated() ? this.renderRedirect() : this.renderLogin();
   }
 }
 

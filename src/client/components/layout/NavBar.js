@@ -8,13 +8,13 @@ class NavBar extends Component {
     links: [
       // { to: "/users", text: "Usuários" },
       { to: "/login", text: "Entrar" },
-      { to: "/register", text: "Cadastrar" }
+      { to: "/register", text: "Cadastrar" },
     ],
     username: "",
     imageUrl: "",
     userId: "",
     rightSide: null,
-    loginStatus: ""
+    loginStatus: "",
   };
 
   async componentDidMount() {
@@ -42,7 +42,7 @@ class NavBar extends Component {
   }
 
   renderNavLinks() {
-    const links = this.state.links.map(link =>
+    const links = this.state.links.map((link) =>
       this.renderNavLink(link.to, link.text)
     );
 
@@ -73,7 +73,7 @@ class NavBar extends Component {
         </li>
         <li className="nav-item">
           <Link to="/logout" className="nav-link styled-link">
-            Logout
+            Sair
           </Link>
         </li>
       </ul>

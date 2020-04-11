@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+
 import api from "../../sevices/api";
-import { login } from "../../sevices/auth";
+import { isAuthenticated } from "../../sevices/auth";
 
 class Register extends Component {
   state = {
@@ -8,7 +10,7 @@ class Register extends Component {
     id: "",
     feedback: "",
     roleFilter: "",
-    readOnly: false
+    readOnly: false,
   };
 
   async componentDidMount() {
@@ -57,14 +59,14 @@ class Register extends Component {
   createAccount(account) {
     api
       .post(this.state.url, account)
-      .then(response => {
+      .then((response) => {
         this.setState({ id: response.data.account });
         alert(
           "Cadastro realizado com sucesso.\nClique em OK para acessar sua conta"
         );
         this.props.history.push("/login");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert("Cadastro inválido.\nVerifique suas informações");
         console.log(error);
       });
@@ -99,20 +101,18 @@ class Register extends Component {
     );
   }
 
-  // renderRedirect() {
-  //   if (this.state.redirect) {
-  //     return (
-  //       <Redirect
-  //         to={{
-  //           pathname: `/users/${this.state.id}`,
-  //           state: { from: this.props.location }
-  //         }}
-  //       />
-  //     );
-  //   }
-  // }
+  renderRedirect = () => {
+    return (
+      <Redirect
+        to={{
+          pathname: "/users",
+          state: { from: this.props.location },
+        }}
+      />
+    );
+  };
 
-  render() {
+  renderRegister = () => {
     return (
       <div className="register">
         <div className="d-flex justify-content-start cadastro-text">
@@ -184,9 +184,12 @@ class Register extends Component {
           </div>
           {this.state.feedback && <p>{this.state.feedback}</p>}
         </form>
-        {/* {this.renderRedirect()} */}
       </div>
     );
+  };
+
+  render() {
+    return isAuthenticated() ? this.renderRedirect() : this.renderRegister();
   }
 }
 

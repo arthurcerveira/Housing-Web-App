@@ -1,8 +1,21 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
+import { isAuthenticated } from "../../sevices/auth";
 
 class LandingPage extends Component {
-  render() {
+  renderRedirect = () => {
+    return (
+      <Redirect
+        to={{
+          pathname: "/users",
+          state: { from: this.props.location },
+        }}
+      />
+    );
+  };
+
+  renderLandingPage = () => {
     return (
       <div className="landing-page col-lg-12">
         <h2>Landing Page</h2>
@@ -21,6 +34,10 @@ class LandingPage extends Component {
         </Link>
       </div>
     );
+  };
+
+  render() {
+    return isAuthenticated() ? this.renderRedirect() : this.renderLandingPage();
   }
 }
 
