@@ -53,7 +53,9 @@ class TestAuth(unittest.TestCase):
 
     def test_get_logged_account(self):
         # Create account
-        requests.post(f'{API}accounts/register', data=VALID_ACCOUNTS[0])
+        response = requests.post(
+            f'{API}accounts/register', data=VALID_ACCOUNTS[0])
+        account_id = response.json()['account']
 
         # Login account
         email = VALID_ACCOUNTS[0]["email"]
@@ -82,6 +84,12 @@ class TestAuth(unittest.TestCase):
         response = requests.get(f'{API}logged', headers=invalid_header).json()
 
         self.assertEqual(response["error"], "Invalid token")
+
+        # Send request after the account is deleted
+        requests.delete(f'{API}accounts/{account_id}')
+
+        response = requests.get(f'{API}logged', headers=header).json()
+        self.assertEqual(response["error"], "Account not found")
 
 
 if __name__ == '__main__':
