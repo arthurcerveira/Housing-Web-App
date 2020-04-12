@@ -9,7 +9,8 @@ class User extends Component {
     role: "",
     description: "",
     userId: "",
-    toRegister: ""
+    toRegister: "",
+    userNotFound: false,
   };
 
   async componentDidMount() {
@@ -18,19 +19,24 @@ class User extends Component {
     const userUrl = `/api/accounts/${userId}`;
 
     const res = await api.get(userUrl);
-    const name = res.data.name;
-    const role = res.data.role;
-    const description = res.data.description;
+    console.log(res);
 
-    const toRegister =
-      role === "estudante internacional"
-        ? "/register?role=familia"
-        : "/register?role=estudante";
+    if (res.status === 200) {
+      const name = res.data.name;
+      const role = res.data.role;
+      const description = res.data.description;
 
-    this.setState({ name, role, description, toRegister });
+      const toRegister =
+        role === "estudante internacional"
+          ? "/register?role=familia"
+          : "/register?role=estudante";
+
+      this.setState({ name, role, description, toRegister });
+    }
+    if (res.status === 204) this.setState({ userNotFound: true });
   }
 
-  render() {
+  renderUser() {
     return (
       <div className="col">
         <div className="card">
@@ -76,6 +82,18 @@ class User extends Component {
         </div>
       </div>
     );
+  }
+
+  renderUserNotFound() {
+    return <h3 className="no-users">Usuário não encontrado</h3>;
+  }
+
+  render() {
+    console.log(this.state.userNotFound);
+
+    return this.state.userNotFound
+      ? this.renderUserNotFound()
+      : this.renderUser();
   }
 }
 
