@@ -9,6 +9,8 @@ class UserList extends Component {
   constructor(props) {
     super(props);
 
+    this._isMounted = false;
+
     this.state = {
       url: "/api/accounts/",
       users: [],
@@ -19,6 +21,8 @@ class UserList extends Component {
   }
 
   async componentDidMount() {
+    this._isMounted = true;
+
     const res = await api.get(this.state.url);
     const userIsEmpty = Object.keys(res.data).length === 0;
     let roleFilter = "";
@@ -55,15 +59,20 @@ class UserList extends Component {
       }
     }
 
-    this.setState({ users: res.data, userIsEmpty, roleFilter });
+    if (this._isMounted)
+      this.setState({ users: res.data, userIsEmpty, roleFilter });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   updateNameFilter(event) {
-    this.setState({ nameFilter: event.target.value });
+    if (this._isMounted) this.setState({ nameFilter: event.target.value });
   }
 
   updateRoleFilter(event) {
-    this.setState({ roleFilter: event.target.value });
+    if (this._isMounted) this.setState({ roleFilter: event.target.value });
   }
 
   filterUsers() {
