@@ -1,17 +1,26 @@
+// React packages
 import React, { Component } from "react";
-import api from "./sevices/api";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
 
+// Services
+import api from "./sevices/api";
+import store from "./store";
+
+//Styling
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.css";
+
+//Layout
 import NavBar from "./components/layout/NavBar";
 
+//Routes
 import Routes from "./routes";
 
 export default class App extends Component {
   state = {
     api: "/api",
-    message: ""
+    message: "",
   };
 
   async componentDidMount() {
@@ -22,13 +31,15 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <NavBar />
-          <div className="container">
-            <Routes />
+        <Provider store={store}>
+          <div className="App">
+            <NavBar />
+            <div className="container">
+              <Routes />
+            </div>
+            <div className="server-status">{this.serverIsRunning()}</div>
           </div>
-          <div className="server-status">{this.serverIsRunning()}</div>
-        </div>
+        </Provider>
       </Router>
     );
   }

@@ -8,7 +8,7 @@ class UserCard extends Component {
     role: "",
     description: "",
     id: "",
-    imageLoading: true
+    imageLoading: true,
   };
 
   componentDidMount() {
@@ -18,14 +18,14 @@ class UserCard extends Component {
       name,
       role,
       description,
-      id
+      id,
     });
   }
 
   render() {
     return (
       <div className="col-md-3 col-sm-6 mb-5">
-        <Link className="styled-link black-text" to={`users/${this.state.id}`}>
+        <Link className="styled-link black-text" to={`/users/${this.state.id}`}>
           <div className="card user-card">
             <h5 className="card-header text-capitalize">
               <b>{this.state.name}</b>

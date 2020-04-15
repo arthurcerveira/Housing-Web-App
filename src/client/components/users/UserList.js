@@ -1,25 +1,29 @@
 import React, { Component } from "react";
 
 import api from "../../sevices/api";
-import { isAuthenticated } from "../../sevices/auth";
+import { connect } from "react-redux";
 
 import UserCard from "./UserCard";
 
 class UserList extends Component {
-  state = {
-    url: "/api/accounts/",
-    users: [],
-    userIsEmpty: false,
-    nameFilter: "",
-    roleFilter: "",
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      url: "/api/accounts/",
+      users: [],
+      userIsEmpty: false,
+      nameFilter: "",
+      roleFilter: "",
+    };
+  }
 
   async componentDidMount() {
     const res = await api.get(this.state.url);
     const userIsEmpty = Object.keys(res.data).length === 0;
     let roleFilter = "";
 
-    if (isAuthenticated()) {
+    if (this.props.isLoggedIn) {
       const res = await api.get(`/api/logged`);
 
       let role = res.data.role;
@@ -79,7 +83,7 @@ class UserList extends Component {
   }
 
   renderSelect() {
-    return isAuthenticated() ? (
+    return this.props.isLoggedIn ? (
       <select
         className="text-capitalize form-control"
         value={this.state.roleFilter}
@@ -153,4 +157,6 @@ class UserList extends Component {
   }
 }
 
-export default UserList;
+export default connect((state) => ({
+  isLoggedIn: state.authentication.isLoggedIn,
+}))(UserList);

@@ -1,27 +1,27 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "../../sevices/api";
-import { isAuthenticated } from "../../sevices/auth";
+import { connect } from "react-redux";
 
 class NavBar extends Component {
-  state = {
-    links: [
-      // { to: "/users", text: "Usuários" },
-      { to: "/login", text: "Entrar" },
-      { to: "/register", text: "Cadastrar" },
-    ],
-    username: "",
-    imageUrl: "",
-    userId: "",
-    rightSide: null,
-    loginStatus: "",
-  };
+  constructor(props) {
+    super(props);
 
-  async componentDidMount() {
-    let rightSide = null;
-    let loginStatus = "";
+    this.state = {
+      links: [
+        // { to: "/users", text: "Usuários" },
+        { to: "/login", text: "Entrar" },
+        { to: "/register", text: "Cadastrar" },
+      ],
+      username: "",
+      imageUrl: "",
+      userId: "",
+      rightSide: null,
+    };
+  }
 
-    if (isAuthenticated()) {
+  async getAccountInfo() {
+    if (this.props.isLoggedIn) {
       const res = await api.get(`/api/logged`);
 
       const userId = res.data._id;
@@ -30,15 +30,7 @@ class NavBar extends Component {
         "https://avatars0.githubusercontent.com/u/45042445?s=460&v=4";
 
       this.setState({ username, imageUrl, userId });
-
-      rightSide = this.renderLoggedUser();
-      loginStatus = "logged";
-    } else {
-      rightSide = this.renderNavLinks();
-      loginStatus = "unlogged";
     }
-
-    this.setState({ rightSide, loginStatus });
   }
 
   renderNavLinks() {
@@ -60,6 +52,8 @@ class NavBar extends Component {
   }
 
   renderLoggedUser() {
+    this.getAccountInfo();
+
     return (
       <ul className="navbar-nav">
         <li className="nav-item">
@@ -82,13 +76,16 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div key={this.state.loginStatus}>
+      <div>
         <nav className="navbar navbar-expand-md fixed-top bg-dark navbar-dark">
           <Link to="/" className="align-items-center">
             <span className="col-md-2 navbar-brand">Housing</span>
           </Link>
           <div className="col-md-11 collapse navbar-collapse justify-content-end">
-            {this.state.rightSide}
+            {this.props.isLoggedIn
+              ? this.renderLoggedUser()
+              : this.renderNavLinks()}
+            {/* {this.state.rightSide} */}
           </div>
         </nav>
       </div>
@@ -96,4 +93,6 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default connect((state) => ({
+  isLoggedIn: state.authentication.isLoggedIn,
+}))(NavBar);

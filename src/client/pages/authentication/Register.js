@@ -2,16 +2,20 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
 import api from "../../sevices/api";
-import { isAuthenticated } from "../../sevices/auth";
+import { connect } from "react-redux";
 
 class Register extends Component {
-  state = {
-    url: "/api/accounts/register",
-    id: "",
-    feedback: "",
-    roleFilter: "",
-    readOnly: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      url: "/api/accounts/register",
+      id: "",
+      feedback: "",
+      roleFilter: "",
+      readOnly: false,
+    };
+  }
 
   async componentDidMount() {
     let roleFilter = "";
@@ -189,8 +193,12 @@ class Register extends Component {
   };
 
   render() {
-    return isAuthenticated() ? this.renderRedirect() : this.renderRegister();
+    return this.props.isLoggedIn
+      ? this.renderRedirect()
+      : this.renderRegister();
   }
 }
 
-export default Register;
+export default connect((state) => ({
+  isLoggedIn: state.authentication.isLoggedIn,
+}))(Register);

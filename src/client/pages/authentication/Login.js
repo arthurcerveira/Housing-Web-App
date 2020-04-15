@@ -2,10 +2,16 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
 import api from "../../sevices/api";
-import { login, isAuthenticated } from "../../sevices/auth";
+import * as AuthActions from "../../store/actions/authentication";
+
+import { connect } from "react-redux";
 
 class Login extends Component {
-  state = { error: "" };
+  constructor(props) {
+    super(props);
+
+    this.state = { error: "" };
+  }
 
   getFormData() {
     event.preventDefault();
@@ -26,9 +32,12 @@ class Login extends Component {
         email,
         password,
       });
-      login(response.data.token);
-      this.props.history.push("/users/");
-      location.reload(true);
+
+      this.props.dispatch(AuthActions.loginAccount(response.data.token));
+
+      // login(response.data.token);
+      this.props.history.push("/");
+      // location.reload(true);
     } catch (err) {
       this.setState({
         error: "Senha ou email incorretos",
@@ -90,8 +99,10 @@ class Login extends Component {
   };
 
   render() {
-    return isAuthenticated() ? this.renderRedirect() : this.renderLogin();
+    return this.props.isLoggedIn ? this.renderRedirect() : this.renderLogin();
   }
 }
 
-export default Login;
+export default connect((state) => ({
+  isLoggedIn: state.authentication.isLoggedIn,
+}))(Login);

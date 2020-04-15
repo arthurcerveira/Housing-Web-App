@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 
-import { isAuthenticated } from "../../sevices/auth";
+import { connect } from "react-redux";
 
 class LandingPage extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   renderRedirect = () => {
     return (
       <Redirect
@@ -37,8 +41,12 @@ class LandingPage extends Component {
   };
 
   render() {
-    return isAuthenticated() ? this.renderRedirect() : this.renderLandingPage();
+    return this.props.isLoggedIn
+      ? this.renderRedirect()
+      : this.renderLandingPage();
   }
 }
 
-export default LandingPage;
+export default connect((state) => ({
+  isLoggedIn: state.authentication.isLoggedIn,
+}))(LandingPage);

@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { logout } from "../../sevices/auth";
+
+import { connect } from "react-redux";
+import * as AuthActions from "../../store/actions/authentication";
 
 class Logout extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
-    logout();
-    location.reload(true);
+    this.props.dispatch(AuthActions.logoutAccount());
   }
 
   render() {
@@ -13,11 +18,11 @@ class Logout extends Component {
       <Redirect
         to={{
           pathname: "/",
-          state: { from: this.props.location }
+          state: { from: this.props.location },
         }}
       />
     );
   }
 }
 
-export default Logout;
+export default connect()(Logout);

@@ -19,7 +19,6 @@ class User extends Component {
     const userUrl = `/api/accounts/${userId}`;
 
     const res = await api.get(userUrl);
-    console.log(res);
 
     if (res.status === 200) {
       const name = res.data.name;
@@ -89,8 +88,6 @@ class User extends Component {
   }
 
   render() {
-    console.log(this.state.userNotFound);
-
     return this.state.userNotFound
       ? this.renderUserNotFound()
       : this.renderUser();
