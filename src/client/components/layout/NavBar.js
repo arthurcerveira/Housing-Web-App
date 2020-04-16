@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "../../sevices/api";
 import { connect } from "react-redux";
+import { verifyAuthentication } from "../../sevices/auth";
+import * as AuthActions from "../../store/actions/authentication";
 
 class NavBar extends Component {
   constructor(props) {
@@ -22,6 +24,12 @@ class NavBar extends Component {
 
   async getAccountInfo() {
     if (this.props.isLoggedIn) {
+      const verification = await verifyAuthentication();
+      if (!verification) {
+        this.props.dispatch(AuthActions.logoutAccount());
+        return;
+      }
+
       const res = await api.get(`/api/logged`);
 
       const userId = res.data._id;
@@ -85,7 +93,6 @@ class NavBar extends Component {
             {this.props.isLoggedIn
               ? this.renderLoggedUser()
               : this.renderNavLinks()}
-            {/* {this.state.rightSide} */}
           </div>
         </nav>
       </div>
